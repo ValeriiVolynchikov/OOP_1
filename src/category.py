@@ -27,6 +27,8 @@ class Category:
         Метод для добавления продукта в категорию.
         :param product: Объект класса Product.
         """
+        if not isinstance(product, Product):
+            raise TypeError("Можно добавлять только объекты класса Product или его наследников.")
         self._products.append(product)
         Category.product_count += 1
 
