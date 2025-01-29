@@ -1,8 +1,9 @@
 import pytest
+
 from src.product import Product
 
 
-def test_product_initialization():
+def test_product_initialization() -> None:
     """Тест инициализации продукта."""
     product = Product("Test Product", "Test Description", 100.0, 10)
     assert product.name == "Test Product"
@@ -11,33 +12,33 @@ def test_product_initialization():
     assert product.quantity == 10
 
 
-def test_product_negative_price():
+def test_product_negative_price() -> None:
     """Тест на отрицательную цену при инициализации."""
     with pytest.raises(ValueError):
         Product("Test Product", "Test Description", -100.0, 10)
 
 
-def test_product_negative_quantity():
+def test_product_negative_quantity() -> None:
     """Тест на отрицательное количество при инициализации."""
     with pytest.raises(ValueError):
         Product("Test Product", "Test Description", 100.0, -10)
 
 
-def test_product_price_setter():
+def test_product_price_setter() -> None:
     """Тест сеттера цены."""
     product = Product("Test Product", "Test Description", 100.0, 10)
     product.price = 200.0
     assert product.price == 200.0
 
 
-def test_product_price_setter_negative():
+def test_product_price_setter_negative() -> None:
     """Тест сеттера цены на отрицательное значение."""
     product = Product("Test Product", "Test Description", 100.0, 10)
     product.price = -200.0
     assert product.price == 100.0  # Цена не должна измениться
 
 
-def test_new_product_classmethod():
+def test_new_product_classmethod() -> None:
     """Тест класс-метода для создания нового продукта."""
     product_data = {
         "name": "New Product",

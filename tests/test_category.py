@@ -1,9 +1,10 @@
 import pytest
-from src.product import Product
+
 from src.category import Category
+from src.product import Product
 
 
-def test_category_initialization():
+def test_category_initialization() -> None:
     """Тест инициализации категории."""
     category = Category("Test Category", "Test Description")
     assert category.name == "Test Category"
@@ -11,7 +12,7 @@ def test_category_initialization():
     assert len(category._products) == 0
 
 
-def test_category_add_product():
+def test_category_add_product() -> None:
     """Тест добавления продукта в категорию."""
     category = Category("Test Category", "Test Description")
     product = Product("Test Product", "Test Description", 100.0, 10)
@@ -20,7 +21,7 @@ def test_category_add_product():
     assert category.product_count == 1
 
 
-def test_category_products_property():
+def test_category_products_property() -> None:
     """Тест геттера для списка продуктов."""
     category = Category("Test Category", "Test Description")
     product1 = Product("Product 1", "Description 1", 100.0, 10)
@@ -31,14 +32,14 @@ def test_category_products_property():
     assert category.products == expected_output
 
 
-def test_category_count():
+def test_category_count() -> None:
     """Тест счетчика категорий."""
     initial_count = Category.category_count
     category = Category("Test Category", "Test Description")
     assert Category.category_count == initial_count + 1
 
 
-def test_product_count():
+def test_product_count() -> None:
     """Тест счетчика продуктов."""
     initial_count = Category.product_count
     category = Category("Test Category", "Test Description")

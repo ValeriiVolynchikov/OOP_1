@@ -1,5 +1,5 @@
-from product import Product
-from category import Category
+from src.product import Product
+from src.category import Category
 
 if __name__ == "__main__":
     # Создаем продукты
@@ -8,8 +8,10 @@ if __name__ == "__main__":
     product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
 
     # Создаем категорию
-    category1 = Category("Смартфоны",
-                         "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни")
+    category1 = Category(
+        "Смартфоны",
+        "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+    )
 
     # Добавляем продукты в категорию
     category1.add_product(product1)
@@ -20,7 +22,7 @@ if __name__ == "__main__":
     print(category1.products)
 
     # Добавляем новый продукт
-    product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
+    product4 = Product('55" QLED 4K', "Фоновая подсветка", 123000.0, 7)
     category1.add_product(product4)
     print("\nПосле добавления нового продукта:")
     print(category1.products)
