@@ -1,6 +1,6 @@
 class Product:
     """ Класс для представления продукта."""
-    def __init__(self, name: str, description: str, price: float, quantity: int):
+    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         """
         Инициализация объекта Product.
 
@@ -21,24 +21,21 @@ class Product:
         self._price = price  # Приватный атрибут цены
         self.quantity = quantity
 
-
     @property
-    def price(self):
+    def price(self) -> float:
         """Геттер для атрибута 'цена'."""
         return self._price
 
-
     @price.setter
-    def price(self, new_price):
+    def price(self, new_price: float) -> None:
         """Сеттер для атрибута 'цена'."""
         if new_price <= 0:
             print("Цена не должна быть нулевая или отрицательная")
             return
         self._price = new_price
 
-
     @classmethod
-    def new_product(cls, product_data: dict):
+    def new_product(cls, product_data: dict) -> 'Product':
         """
         Класс-метод для создания нового продукта из словаря.
 
