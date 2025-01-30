@@ -1,11 +1,12 @@
 import pytest
-from src.product import Product
+
 from src.category import Category
 from src.iterator import CategoryIterator
+from src.product import Product
 
 
-def test_category_iterator():
-    # Создаем несколько продуктов
+def test_category_iterator() -> None:
+    """Тест создание несколько продуктов и категорий"""
     product1 = Product("Product A", "Description", 100.0, 10)
     product2 = Product("Product B", "Description", 200.0, 5)
     product3 = Product("Product C", "Description", 300.0, 7)
@@ -27,8 +28,8 @@ def test_category_iterator():
     assert products_from_iterator[2] == product3
 
 
-def test_category_iterator_stop_iteration():
-    # Создаем категорию без продуктов
+def test_category_iterator_stop_iteration() -> None:
+    """Тест на создание категории без продуктов"""
     category = Category("EmptyCategory", "Empty Description")
 
     # Создаем итератор для пустой категории

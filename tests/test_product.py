@@ -1,4 +1,5 @@
 import pytest
+
 from src.product import Product
 
 
@@ -57,16 +58,19 @@ def test_product_creation() -> None:
     product = Product("Test Product", "Description", 100.0, 10)
     assert str(product) == "Test Product, 100.0 руб. Остаток: 10 шт."
 
+
 def test_product_addition() -> None:
     """Проверяем строковое представление продукта"""
     product1 = Product("Product A", "Description", 100.0, 10)
     product2 = Product("Product B", "Description", 200.0, 5)
     assert product1 + product2 == 2000.0
 
+
 def test_invalid_price() -> None:
     """Проверяем, что при отрицательной цене выбрасывается исключение ValueError"""
     with pytest.raises(ValueError):
         Product("Invalid Product", "Description", -100.0, 10)
+
 
 def test_invalid_quantity() -> None:
     """Проверяем, что при отрицательном количестве выбрасывается исключение ValueError"""
