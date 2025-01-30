@@ -1,5 +1,4 @@
 import pytest
-
 from src.category import Category
 from src.product import Product
 
@@ -46,3 +45,26 @@ def test_product_count() -> None:
     product = Product("Test Product", "Test Description", 100.0, 10)
     category.add_product(product)
     assert Category.product_count == initial_count + 1
+
+
+def test_empty_category():
+    """Проверяем, что строковое представление пустой категории возвращает правильное сообщение"""
+    category = Category("EmptyCategory", "Empty Description")
+    assert str(category) == "EmptyCategory, количество продуктов: 0 шт."
+
+
+def test_non_empty_category():
+    """Тест создание несколько продуктов и категорий """
+    product1 = Product("Product A", "Description", 100.0, 10)
+    product2 = Product("Product B", "Description", 200.0, 5)
+    product3 = Product("Product C", "Description", 300.0, 7)
+
+    # Создаем категорию и добавляем в нее продукты
+    category = Category("TestCategory", "Test Description")
+    category.add_product(product1)
+    category.add_product(product2)
+    category.add_product(product3)
+
+    # Проверяем, что строковое представление категории возвращает правильное сообщение
+    total_quantity = product1.quantity + product2.quantity + product3.quantity
+    assert str(category) == f"TestCategory, количество продуктов: {total_quantity} шт."
