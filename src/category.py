@@ -38,6 +38,12 @@ class Category:
         Геттер для получения списка продуктов.
         Возвращает строку с описанием продуктов.
         """
-        return "\n".join(
-            [f"{p.name}, {p.price} руб. Остаток: {p.quantity} шт." for p in self._products]
-        )
+        return "\n".join([str(p) for p in self._products])
+
+    def __str__(self) -> str:
+        """Строковое представление объекта Category."""
+        total_quantity = sum(p.quantity for p in self._products)
+        # Добавляем условие для случая, если нет продуктов в категории
+        if not self._products:
+            return f"{self.name}, количество продуктов: 0 шт."
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
