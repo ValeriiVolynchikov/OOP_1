@@ -2,7 +2,7 @@ import pytest
 
 from src.category import Category
 from src.iterator import CategoryIterator
-from src.product import Product, Smartphone, LawnGrass
+from src.product import LawnGrass, Product, Smartphone
 
 
 def test_category_iterator() -> None:
@@ -58,7 +58,7 @@ def test_iterate_over_smartphones() -> None:
         description="512GB, Gray space",
         price=210000.0,
         quantity=8,
-        efficiency="98.2",
+        efficiency=98.2,
         model="15",
         memory=512,
         color="Gray space"
@@ -68,7 +68,7 @@ def test_iterate_over_smartphones() -> None:
         description="256GB, Черный",
         price=180000.0,
         quantity=5,
-        efficiency="95.5",
+        efficiency=95.5,
         model="S23",
         memory=256,
         color="Черный"
@@ -92,7 +92,7 @@ def test_iterate_over_lawn_grass() -> None:
         price=500.0,
         quantity=20,
         country="Россия",
-        germination_period=7,
+        germination_period="7 дней",
         color="Зеленый"
     )
     lawn_grass2 = LawnGrass(
@@ -101,7 +101,7 @@ def test_iterate_over_lawn_grass() -> None:
         price=450.0,
         quantity=15,
         country="США",
-        germination_period=5,
+        germination_period="5 дней",
         color="Темно-зеленый"
     )
     category.add_product(lawn_grass1)

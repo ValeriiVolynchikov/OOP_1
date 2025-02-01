@@ -1,6 +1,7 @@
 import pytest
+
 from src.category import Category
-from src.product import Product, Smartphone, LawnGrass
+from src.product import LawnGrass, Product, Smartphone
 
 
 def test_category_initialization() -> None:
@@ -71,7 +72,7 @@ def test_add_smartphone_to_category() -> None:
         description="512GB, Gray space",
         price=210000.0,
         quantity=8,
-        efficiency="98.2",
+        efficiency=98.2,
         model="15",
         memory=512,
         color="Gray space"
@@ -90,7 +91,7 @@ def test_add_lawn_grass_to_category() -> None:
         price=500.0,
         quantity=20,
         country="Россия",
-        germination_period=7,
+        germination_period="7 дней",
         color="Зеленый"
     )
     category.add_product(lawn_grass)
@@ -102,7 +103,7 @@ def test_add_invalid_product_to_category() -> None:
     """Тест добавления недействительного продукта в категорию"""
     category = Category("Смартфоны", "Высокотехнологичные смартфоны")
     with pytest.raises(TypeError):
-        category.add_product("Not a product")
+        category.add_product("Not a product")  # type: ignore
 
 
 def test_category_str_representation() -> None:
@@ -113,7 +114,7 @@ def test_category_str_representation() -> None:
         description="512GB, Gray space",
         price=210000.0,
         quantity=8,
-        efficiency="98.2",
+        efficiency=98.2,
         model="15",
         memory=512,
         color="Gray space"

@@ -57,9 +57,10 @@ class Product:
         """Магический метод сложения двух продуктов."""
         if not isinstance(other, Product):
             raise TypeError("Можно складывать только объекты класса Product.")
-        if type(self) != type(other):
+        if type(self) is not type(other):
             raise TypeError("Можно складывать только объекты одного класса.")
         return (self.price * self.quantity) + (other.price * other.quantity)
+
 
 class Smartphone(Product):
     """Класс для представления смартфона."""
@@ -70,6 +71,7 @@ class Smartphone(Product):
         self.model = model
         self.memory = memory
         self.color = color
+
 
 class LawnGrass(Product):
     """Класс для представления смартфона."""

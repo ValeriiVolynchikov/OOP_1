@@ -1,6 +1,6 @@
 import pytest
 
-from src.product import Product, Smartphone, LawnGrass
+from src.product import LawnGrass, Product, Smartphone
 
 
 def test_product_initialization() -> None:
@@ -175,7 +175,7 @@ def test_add_different_classes() -> None:
         color="Зеленый"
     )
     with pytest.raises(TypeError):
-        total_value = smartphone + grass
+        smartphone + grass
 
 
 def test_add_non_product() -> None:
@@ -194,4 +194,4 @@ def test_add_non_product() -> None:
         color="Черный"
     )
     with pytest.raises(TypeError):
-        total_value = smartphone + 100
+        smartphone + 100  # type: ignore
