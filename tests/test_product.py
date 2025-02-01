@@ -1,6 +1,6 @@
 import pytest
 
-from src.product import Product
+from src.product import Product, Smartphone, LawnGrass
 
 
 def test_product_initialization() -> None:
@@ -76,3 +76,122 @@ def test_invalid_quantity() -> None:
     """Проверяем, что при отрицательном количестве выбрасывается исключение ValueError"""
     with pytest.raises(ValueError):
         Product("Invalid Product", "Description", 100.0, -10)
+
+
+def test_smartphone_creation() -> None:
+    """
+    Тестирует создание объекта класса Smartphone и проверяет корректность его атрибутов.
+    """
+    smartphone = Smartphone(
+        name="Samsung Galaxy S23",
+        description="256GB, Черный",
+        price=80000.0,
+        quantity=10,
+        efficiency=95.5,
+        model="S23",
+        memory=256,
+        color="Черный"
+    )
+    assert smartphone.name == "Samsung Galaxy S23"
+    assert smartphone.price == 80000.0
+    assert smartphone.quantity == 10
+    assert smartphone.efficiency == 95.5
+    assert smartphone.model == "S23"
+    assert smartphone.memory == 256
+    assert smartphone.color == "Черный"
+
+
+def test_lawn_grass_creation() -> None:
+    """
+    Тестирует создание объекта класса LawnGrass и проверяет корректность его атрибутов.
+    """
+    grass = LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый"
+    )
+    assert grass.name == "Газонная трава"
+    assert grass.price == 500.0
+    assert grass.quantity == 20
+    assert grass.country == "Россия"
+    assert grass.germination_period == "7 дней"
+    assert grass.color == "Зеленый"
+
+
+def test_add_smartphones() -> None:
+    """
+    Тестирует сложение двух объектов класса Smartphone и проверяет корректность результата.
+    """
+    smartphone1 = Smartphone(
+        name="Samsung Galaxy S23",
+        description="256GB, Черный",
+        price=80000.0,
+        quantity=10,
+        efficiency=95.5,
+        model="S23",
+        memory=256,
+        color="Черный"
+    )
+    smartphone2 = Smartphone(
+        name="iPhone 14",
+        description="128GB, Белый",
+        price=70000.0,
+        quantity=5,
+        efficiency=98.0,
+        model="14",
+        memory=128,
+        color="Белый"
+    )
+    total_value = smartphone1 + smartphone2
+    assert total_value == (80000.0 * 10) + (70000.0 * 5)
+
+
+def test_add_different_classes() -> None:
+    """
+    Тестирует попытку сложения объектов разных классов (Smartphone и LawnGrass).
+    Ожидается ошибка TypeError.
+    """
+    smartphone = Smartphone(
+        name="Samsung Galaxy S23",
+        description="256GB, Черный",
+        price=80000.0,
+        quantity=10,
+        efficiency=95.5,
+        model="S23",
+        memory=256,
+        color="Черный"
+    )
+    grass = LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый"
+    )
+    with pytest.raises(TypeError):
+        total_value = smartphone + grass
+
+
+def test_add_non_product() -> None:
+    """
+    Тестирует попытку сложения объекта Smartphone с не-продуктом (например, числом).
+    Ожидается ошибка TypeError.
+    """
+    smartphone = Smartphone(
+        name="Samsung Galaxy S23",
+        description="256GB, Черный",
+        price=80000.0,
+        quantity=10,
+        efficiency=95.5,
+        model="S23",
+        memory=256,
+        color="Черный"
+    )
+    with pytest.raises(TypeError):
+        total_value = smartphone + 100

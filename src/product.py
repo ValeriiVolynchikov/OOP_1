@@ -57,4 +57,25 @@ class Product:
         """Магический метод сложения двух продуктов."""
         if not isinstance(other, Product):
             raise TypeError("Можно складывать только объекты класса Product.")
+        if type(self) != type(other):
+            raise TypeError("Можно складывать только объекты одного класса.")
         return (self.price * self.quantity) + (other.price * other.quantity)
+
+class Smartphone(Product):
+    """Класс для представления смартфона."""
+    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: float, model: str,
+                 memory: int, color: str) -> None:
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+class LawnGrass(Product):
+    """Класс для представления смартфона."""
+    def __init__(self, name: str, description: str, price: float, quantity: int, country: str,
+                 germination_period: str, color: str) -> None:
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
