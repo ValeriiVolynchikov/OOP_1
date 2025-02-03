@@ -2,7 +2,7 @@ import pytest
 
 from src.category import Category
 from src.iterator import CategoryIterator
-from src.product import Product
+from src.product import LawnGrass, Product, Smartphone
 
 
 def test_category_iterator() -> None:
@@ -48,3 +48,67 @@ def test_category_iterator_stop_iteration() -> None:
     # Убедимся, что при попытке получить второй элемент из итератора выбрасывается StopIteration
     with pytest.raises(StopIteration):
         next(iterator)
+
+
+def test_iterate_over_smartphones() -> None:
+    """Тест итерации на смартфоны"""
+    category = Category("Смартфоны", "Высокотехнологичные смартфоны")
+    smartphone1 = Smartphone(
+        name="iPhone 15",
+        description="512GB, Gray space",
+        price=210000.0,
+        quantity=8,
+        efficiency=98.2,
+        model="15",
+        memory=512,
+        color="Gray space"
+    )
+    smartphone2 = Smartphone(
+        name="Samsung Galaxy S23",
+        description="256GB, Черный",
+        price=180000.0,
+        quantity=5,
+        efficiency=95.5,
+        model="S23",
+        memory=256,
+        color="Черный"
+    )
+    category.add_product(smartphone1)
+    category.add_product(smartphone2)
+
+    iterator = CategoryIterator(category)
+    products = list(iterator)
+    assert len(products) == 2
+    assert products[0].name == "iPhone 15"
+    assert products[1].name == "Samsung Galaxy S23"
+
+
+def test_iterate_over_lawn_grass() -> None:
+    """Тест итерации газонная трава"""
+    category = Category("Газонная трава", "Различные виды газонной травы")
+    lawn_grass1 = LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава для газона",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый"
+    )
+    lawn_grass2 = LawnGrass(
+        name="Газонная трава 2",
+        description="Выносливая трава",
+        price=450.0,
+        quantity=15,
+        country="США",
+        germination_period="5 дней",
+        color="Темно-зеленый"
+    )
+    category.add_product(lawn_grass1)
+    category.add_product(lawn_grass2)
+
+    iterator = CategoryIterator(category)
+    products = list(iterator)
+    assert len(products) == 2
+    assert products[0].name == "Газонная трава"
+    assert products[1].name == "Газонная трава 2"
