@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from .product import Product
 
@@ -8,7 +8,7 @@ class Category:
     category_count = 0  # Количество категорий
     product_count = 0  # Количество всех товаров
 
-    def __init__(self, name: str, description: str) -> None:
+    def __init__(self, name: str, description: str, products: Optional[List[Product]] = None) -> None:
         """
                 Инициализация объекта Category.
 
@@ -18,11 +18,13 @@ class Category:
                 """
         self.name = name
         self.description = description
-        self._products: List[Product] = []  # Приватный список продуктов
+        self._products: List[Product] = products if products is not None else []  # Приватный список продуктов
         # Увеличиваем статические атрибуты класса
         Category.category_count += 1
+        # Увеличиваем счетчик продуктов на количество переданных продуктов
+        Category.product_count += len(self._products)
 
-    def add_product(self, product: Product) -> None:
+    def add_product(self, product: 'Product') -> None:
         """
         Метод для добавления продукта в категорию.
         :param product: Объект класса Product.
