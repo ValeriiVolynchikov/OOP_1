@@ -1,4 +1,7 @@
-class Product:
+from .base_product import BaseProduct
+from .logging_mixin import LoggingMixin
+
+class Product(LoggingMixin, BaseProduct):
     """ Класс для представления продукта."""
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         """
@@ -15,11 +18,27 @@ class Product:
             raise ValueError("Цена товара не может быть отрицательной")
         if quantity < 0:
             raise ValueError("Количество товара не может быть отрицательным")
-
-        self.name = name
-        self.description = description
+        super().__init__(name=name, description=description, price=price, quantity=quantity)
         self.__price = price  # Приватный атрибут цены
-        self.quantity = quantity
+
+    def __repr__(self) -> str:
+        # Используем имя с подчеркиванием для доступа к защищенному атрибуту
+        return (f"Product(name={self.name!r}, description={self.description!r}, "
+                f"price={self.__price}, quantity={self.quantity})")
+
+    @classmethod
+    def new_product(cls, product_data: dict) -> 'Product':
+        """
+        Класс-метод для создания нового продукта из словаря.
+        :param product_data: Словарь с данными о продукте.
+        :return: Объект класса Product.
+        """
+        return cls(
+            name=product_data["name"],
+            description=product_data["description"],
+            price=product_data["price"],
+            quantity=product_data["quantity"]
+        )
 
     @property
     def price(self) -> float:
@@ -34,24 +53,15 @@ class Product:
             return
         self.__price = new_price
 
-    @classmethod
-    def new_product(cls, product_data: dict) -> 'Product':
-        """
-        Класс-метод для создания нового продукта из словаря.
 
-        :param product_data: Словарь с данными о продукте.
-        :return: Объект класса Product.
-        """
-        return cls(
-            name=product_data["name"],
-            description=product_data["description"],
-            price=product_data["price"],
-            quantity=product_data["quantity"],
-        )
+    def get_info(self) -> str:
+        """Метод для получения информации о продукте."""
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __str__(self) -> str:
         """Строковое представление объекта Product."""
-        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+        return self.get_info()
+
 
     def __add__(self, other: 'Product') -> float:
         """Магический метод сложения двух продуктов."""
@@ -72,12 +82,20 @@ class Smartphone(Product):
         self.memory = memory
         self.color = color
 
+    def get_info(self) -> str:
+        base_info = super().get_info()
+        return f"{base_info}, Производительность: {self.efficiency}, Модель: {self.model}, Объем памяти: {self.memory} ГБ, Цвет: {self.color}"
+
 
 class LawnGrass(Product):
-    """Класс для представления смартфона."""
+    """Класс для представления газонной травы."""
     def __init__(self, name: str, description: str, price: float, quantity: int, country: str,
                  germination_period: str, color: str) -> None:
         super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period
         self.color = color
+
+    def get_info(self) -> str:
+        base_info = super().get_info()
+        return f"{base_info}, Страна: {self.country}, Срок прорастания: {self.germination_period}, Цвет: {self.color}"
