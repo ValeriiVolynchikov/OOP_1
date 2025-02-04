@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from typing import Any
+
 import pytest
 from pytest import CaptureFixture
+
 from src.logging_mixin import LoggingMixin
 
 
@@ -11,7 +13,8 @@ class BaseDummyClass:
     Этот класс нужен для того, чтобы избежать вызова конструктора object.
     """
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__()  # Передаем вызов дальше
+        # Пустой конструктор, который просто вызывает родительский класс
+        super().__init__(*args, **kwargs)  # Передаем управление дальше
 
 
 class DummyTestClass(BaseDummyClass, LoggingMixin):
@@ -21,25 +24,20 @@ class DummyTestClass(BaseDummyClass, LoggingMixin):
     def __init__(self, name: str, value: int) -> None:
         self.name = name
         self.value = value
-        super().__init__()  # Передаем аргументы LoggingMixin
+        super().__init__(name=name, value=value)  # Передаем параметры в миксин через kwargs
+        # Здесь вы можете вызвать LoggingMixin, если нужно
+        # LoggingMixin.__init__(self, name=name, value=value)
 
 
-def test_logging_mixin_creation(capsys: CaptureFixture) -> None:
-    """
-    Тестирует работу миксина LoggingMixin при создании объекта.
-    Проверяет, что сообщение о создании объекта выводится в консоль корректно.
-    """
-    # Создаем объект тестового класса
-    DummyTestClass(name="Test Object", value=42)
+def test_logging_mixin_creation(capsys: pytest.CaptureFixture) -> None:
+    """Тестирует работу миксина для логирования создания объектов."""
+    DummyTestClass(name="Test Object", value=42)  # Создание объекта
 
-    # Считываем вывод в консоль
-    out, _ = capsys.readouterr()
-
-    # Ожидаемый вывод
+    out, _ = capsys.readouterr()  # Считываем вывод (на уровне ОС)
     expected_output = "Создан объект класса DummyTestClass с параметрами: name=Test Object, value=42\n"
 
     # Удаляем лишние пробелы для точного сравнения
-    out = out.strip()  # Убираем символы перевода строки и пробелы в начале/конце строки
+    out = out.strip()
     expected_output = expected_output.strip()
 
     # Проверяем соответствие вывода ожидаемому результату
@@ -51,11 +49,8 @@ def test_logging_mixin_repr() -> None:
     Тестирует метод __repr__ миксина LoggingMixin.
     Проверяет, что метод возвращает корректное строковое представление объекта.
     """
-    # Создаем объект тестового класса
-    obj = DummyTestClass(name="Test Object", value=42)
-
-    # Ожидаемое строковое представление
-    expected_repr = "DummyTestClass(name='Test Object', value=42)"
+    obj = DummyTestClass(name="Test Object", value=42)  # Создание объекта
+    expected_repr = "DummyTestClass(name='Test Object', value=42)"  # Ожидаемое представление
 
     # Проверяем результат вызова метода __repr__
     assert repr(obj) == expected_repr

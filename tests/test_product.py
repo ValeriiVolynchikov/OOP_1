@@ -219,7 +219,7 @@ def test_product_creation_mix(capsys: CaptureFixture) -> None:
     out, _ = capsys.readouterr()
     expected_output = ("Создан объект класса Product с параметрами: "
                        "name=Test Product, description=Test Description, "
-                       "Product__price=100.0, quantity=10\n")
+                       "price=100.0, quantity=10\n")
 
     # Удаляем лишние пробелы для точного сравнения
     out = out.strip()
