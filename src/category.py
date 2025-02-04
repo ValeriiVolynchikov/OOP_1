@@ -1,7 +1,8 @@
 from typing import List, Optional
+
+from .entity_with_count import EntityWithCount
 from .logging_mixin import LoggingMixin
 from .product import Product
-from .entity_with_count import EntityWithCount
 
 
 class Category(LoggingMixin, EntityWithCount):
@@ -17,7 +18,7 @@ class Category(LoggingMixin, EntityWithCount):
                 :param description: Описание категории.
                 :param products: Список продуктов в категории.
                 """
-        super().__init__()
+        #  super().__init__()
         self.name = name
         self.description = description
         self._products: List[Product] = products if products is not None else []  # Приватный список продуктов
@@ -36,7 +37,6 @@ class Category(LoggingMixin, EntityWithCount):
         self._products.append(product)
         Category.product_count += 1
 
-
     def get_total_quantity(self) -> int:
         """Возвращает общее количество товаров в категории."""
         return sum(p.quantity for p in self._products)
@@ -47,7 +47,6 @@ class Category(LoggingMixin, EntityWithCount):
         if not self._products:  # Проверяем, есть ли продукты в категории
             return f"{self.name}, количество продуктов: 0 шт."
         return f"{self.name}, количество продуктов: {total_quantity} шт."
-
 
     @property
     def products(self) -> str:

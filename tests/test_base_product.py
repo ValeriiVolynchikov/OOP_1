@@ -1,21 +1,21 @@
+from typing import cast
+
 import pytest
+
 from src.base_product import BaseProduct
+
 
 class ConcreteProduct(BaseProduct):
     """Конкретный продукт для тестирования BaseProduct."""
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         super().__init__(name, description, price, quantity)
 
-
     def __str__(self) -> str:
         """Реализация абстрактного метода для строкового представления продукта."""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
-
     def __add__(self, other: 'BaseProduct') -> float:
-        """Реализация абстрактного метода для сложения продуктов.
-        Складывает общую стоимость товаров (цена * количество) двух продуктов.
-        """
+        """Складывает общую стоимость товаров (цена * количество) двух продуктов."""
         if isinstance(other, BaseProduct):
             return (self.price * self.quantity) + (other.price * other.quantity)
         raise TypeError("Можно складывать только объекты класса BaseProduct или его наследников.")
@@ -65,8 +65,9 @@ def test_invalid_addition() -> None:
     Тестирует попытку сложения продукта с некорректным типом.
     """
     product = ConcreteProduct("Test Product", "Test Description", 100.0, 10)
+    invalid_operand = cast(BaseProduct, "Not a product")  # Обход проверки типов
     with pytest.raises(TypeError):
-        product + "Not a product"
+        product + invalid_operand
 
 
 def test_abstract_class_cannot_be_instantiated() -> None:

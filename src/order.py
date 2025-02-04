@@ -6,7 +6,7 @@ class Order(EntityWithCount):
     """Класс для представления заказа."""
 
     def __init__(self, product: Product, quantity: int) -> None:
-        super().__init__()
+        #  super().__init__()
         if quantity <= 0:
             raise ValueError("Количество товара в заказе должно быть положительным.")
         if product.quantity < quantity:

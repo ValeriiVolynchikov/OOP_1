@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+from typing import Any
+
+
 class LoggingMixin:
     """Миксин для логирования создания объектов."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         """
         Конструктор миксина.
         :param args: Позиционные аргументы.
@@ -10,14 +13,6 @@ class LoggingMixin:
         """
         super().__init__(*args, **kwargs)  # Вызываем конструктор родительского класса
         class_name = self.__class__.__name__
-
-        # params = []
-        # for key in self.__dict__:
-        #     value = getattr(self, key)
-        #     params.append(f"{key}={value}")
-        #
-        # print(f"Создан объект класса {class_name} с параметрами: {', '.join(params)}", flush=True)
-        # Сбор параметров для вывода
         params = []
         for key in self.__dict__:
             value = getattr(self, key)  # Получаем значение атрибута
@@ -28,7 +23,6 @@ class LoggingMixin:
                 params.append(f"{key}={value}")
 
         print(f"Создан объект класса {class_name} с параметрами: {', '.join(params)}", flush=True)
-
 
     def __repr__(self) -> str:
         """

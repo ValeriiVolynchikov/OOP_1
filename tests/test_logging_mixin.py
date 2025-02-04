@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+from typing import Any
 import pytest
-
+from pytest import CaptureFixture
 from src.logging_mixin import LoggingMixin
 
 
@@ -9,9 +10,8 @@ class BaseDummyClass:
     Базовый класс для тестирования миксина LoggingMixin.
     Этот класс нужен для того, чтобы избежать вызова конструктора object.
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__()  # Передаем вызов дальше
-
 
 
 class DummyTestClass(BaseDummyClass, LoggingMixin):
@@ -24,7 +24,7 @@ class DummyTestClass(BaseDummyClass, LoggingMixin):
         super().__init__()  # Передаем аргументы LoggingMixin
 
 
-def test_logging_mixin_creation(capsys) -> None:
+def test_logging_mixin_creation(capsys: CaptureFixture) -> None:
     """
     Тестирует работу миксина LoggingMixin при создании объекта.
     Проверяет, что сообщение о создании объекта выводится в консоль корректно.

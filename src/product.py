@@ -1,8 +1,10 @@
 from .base_product import BaseProduct
 from .logging_mixin import LoggingMixin
 
+
 class Product(LoggingMixin, BaseProduct):
-    """ Класс для представления продукта."""
+    """Класс для представления продукта."""
+
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         """
         Инициализация объекта Product.
@@ -23,11 +25,13 @@ class Product(LoggingMixin, BaseProduct):
 
     def __repr__(self) -> str:
         # Используем имя с подчеркиванием для доступа к защищенному атрибуту
-        return (f"Product(name={self.name!r}, description={self.description!r}, "
-                f"price={self.__price}, quantity={self.quantity})")
+        return (
+            f"Product(name={self.name!r}, description={self.description!r}, "
+            f"price={self.__price}, quantity={self.quantity})"
+        )
 
     @classmethod
-    def new_product(cls, product_data: dict) -> 'Product':
+    def new_product(cls, product_data: dict) -> "Product":
         """
         Класс-метод для создания нового продукта из словаря.
         :param product_data: Словарь с данными о продукте.
@@ -37,7 +41,7 @@ class Product(LoggingMixin, BaseProduct):
             name=product_data["name"],
             description=product_data["description"],
             price=product_data["price"],
-            quantity=product_data["quantity"]
+            quantity=product_data["quantity"],
         )
 
     @property
@@ -53,7 +57,6 @@ class Product(LoggingMixin, BaseProduct):
             return
         self.__price = new_price
 
-
     def get_info(self) -> str:
         """Метод для получения информации о продукте."""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
@@ -62,8 +65,7 @@ class Product(LoggingMixin, BaseProduct):
         """Строковое представление объекта Product."""
         return self.get_info()
 
-
-    def __add__(self, other: 'Product') -> float:
+    def __add__(self, other: "BaseProduct") -> float:
         """Магический метод сложения двух продуктов."""
         if not isinstance(other, Product):
             raise TypeError("Можно складывать только объекты класса Product.")
@@ -72,10 +74,20 @@ class Product(LoggingMixin, BaseProduct):
         return (self.price * self.quantity) + (other.price * other.quantity)
 
 
-class Smartphone(Product):
+class Smartphone(Product, LoggingMixin):
     """Класс для представления смартфона."""
-    def __init__(self, name: str, description: str, price: float, quantity: int, efficiency: float, model: str,
-                 memory: int, color: str) -> None:
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: float,
+        model: str,
+        memory: int,
+        color: str,
+    ) -> None:
         super().__init__(name, description, price, quantity)
         self.efficiency = efficiency
         self.model = model
@@ -84,13 +96,23 @@ class Smartphone(Product):
 
     def get_info(self) -> str:
         base_info = super().get_info()
-        return f"{base_info}, Производительность: {self.efficiency}, Модель: {self.model}, Объем памяти: {self.memory} ГБ, Цвет: {self.color}"
+        return f"{base_info}, Производительность: {self.efficiency}, Модель: {self.model},\
+         Объем памяти: {self.memory} ГБ, Цвет: {self.color}"
 
 
 class LawnGrass(Product):
     """Класс для представления газонной травы."""
-    def __init__(self, name: str, description: str, price: float, quantity: int, country: str,
-                 germination_period: str, color: str) -> None:
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ) -> None:
         super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period

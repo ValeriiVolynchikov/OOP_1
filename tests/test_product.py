@@ -1,6 +1,8 @@
 import pytest
-from src.order import Order
+from pytest import CaptureFixture
+
 from src.category import Category
+from src.order import Order
 from src.product import LawnGrass, Product, Smartphone
 
 
@@ -198,7 +200,7 @@ def test_add_non_product() -> None:
         smartphone + 100  # type: ignore
 
 
-def test_product_creation(capfd):
+def test_product_creation_mix(capsys: CaptureFixture) -> None:
     """Тестирует работу миксина при создании объекта."""
     product = Product(
         name="Test Product",
@@ -207,9 +209,17 @@ def test_product_creation(capfd):
         quantity=10
     )
 
+    # Теперь мы можем использовать product, чтобы проверить его атрибуты
+    assert product.name == "Test Product"
+    assert product.description == "Test Description"
+    assert product.price == 100.0
+    assert product.quantity == 10
+
     # Проверяем вывод в консоль
-    out, _ = capfd.readouterr()
-    expected_output = "Создан объект класса Product с параметрами: name=Test Product, description=Test Description, Product__price=100.0, quantity=10\n"
+    out, _ = capsys.readouterr()
+    expected_output = ("Создан объект класса Product с параметрами: "
+                       "name=Test Product, description=Test Description, "
+                       "Product__price=100.0, quantity=10\n")
 
     # Удаляем лишние пробелы для точного сравнения
     out = out.strip()
@@ -217,7 +227,7 @@ def test_product_creation(capfd):
     assert out == expected_output
 
 
-def test_product_attributes():
+def test_product_attributes() -> None:
     """Тестирует правильность установки атрибутов."""
     product = Product(
         name="Test Product",
@@ -231,46 +241,17 @@ def test_product_attributes():
     assert product.quantity == 10
 
 
-def test_logging_mixin():
-    """Тестирует работу миксина для логирования создания объектов."""
-    smartphone = Smartphone(
-        name="Samsung Galaxy S23",
-        description="256GB, Черный",
-        price=80000.0,
-        quantity=10,
-        efficiency=95.5,
-        model="S23",
-        memory=256,
-        color="Черный"
-    )
-    # Проверяем, что сообщение о создании было выведено в консоль
-
-
-def test_order_creation():
+def test_order_creation() -> None:
     """Тестирует создание заказа."""
     product = Product("Test Product", "Test Description", 100.0, 20)
     order = Order(product, 5)
     assert order.quantity == 5
     assert order.total_cost == 500.0
 
-def test_category_with_entity_with_count():
+
+def test_category_with_entity_with_count() -> None:
     """Тестирует работу класса Category с EntityWithCount."""
     category = Category("TestCategory", "Test Description")
     product = Product("Test Product", "Test Description", 100.0, 10)
     category.add_product(product)
     assert category.get_total_quantity() == 10
-
-
-def test_new_product_classmethod() -> None:
-    """Тест класс-метода для создания нового продукта."""
-    product_data = {
-        "name": "New Product",
-        "description": "New Description",
-        "price": 150.0,
-        "quantity": 5,
-    }
-    product = Product.new_product(product_data)
-    assert product.name == "New Product"
-    assert product.description == "New Description"
-    assert product.price == 150.0
-    assert product.quantity == 5

@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class BaseProduct(ABC):
     """Абстрактный базовый класс для продуктов."""
 
@@ -23,6 +24,6 @@ class BaseProduct(ABC):
         pass
 
     @abstractmethod
-    def __add__(self, other) -> float:
+    def __add__(self, other: 'BaseProduct') -> float:
         """Абстрактный метод для сложения продуктов."""
         pass
