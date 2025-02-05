@@ -1,9 +1,11 @@
 from typing import List, Optional
 
-from .product import Product
+from src.entity_with_count import EntityWithCount
+# from .logging_mixin import LoggingMixin
+from src.product import Product
 
 
-class Category:
+class Category(EntityWithCount):
     """Класс для представления категории продуктов."""
     category_count = 0  # Количество категорий
     product_count = 0  # Количество всех товаров
@@ -16,13 +18,12 @@ class Category:
                 :param description: Описание категории.
                 :param products: Список продуктов в категории.
                 """
+        super().__init__()
         self.name = name
         self.description = description
-        self._products: List[Product] = products if products is not None else []  # Приватный список продуктов
-        # Увеличиваем статические атрибуты класса
+        self._products: List[Product] = products if products is not None else []
         Category.category_count += 1
-        # Увеличиваем счетчик продуктов на количество переданных продуктов
-        Category.product_count += len(self._products)
+        Category.product_count += len(self._products)  # Увеличиваем счетчик на количество продуктов
 
     def add_product(self, product: 'Product') -> None:
         """
@@ -35,17 +36,33 @@ class Category:
         Category.product_count += 1
 
     @property
-    def products(self) -> str:
+    def products(self) -> List[Product]:
         """
         Геттер для получения списка продуктов.
+        Возвращает список объектов Product.
+        """
+        return self._products
+
+    def get_products_description(self) -> str:
+        """
         Возвращает строку с описанием продуктов.
         """
         return "\n".join([str(p) for p in self._products])
 
+    def get_total_quantity(self) -> int:
+        """Возвращает общее количество товаров в категории."""
+        return sum(p.quantity for p in self._products)
+
+    def __len__(self) -> int:
+        """Возвращает количество продуктов в категории."""
+        return len(self._products)
+
     def __str__(self) -> str:
         """Строковое представление объекта Category."""
-        total_quantity = sum(p.quantity for p in self._products)
-        # Добавляем условие для случая, если нет продуктов в категории
+        total_quantity = self.get_total_quantity()
         if not self._products:
-            return f"{self.name}, количество продуктов: 0 шт."
-        return f"{self.name}, количество продуктов: {total_quantity} шт."
+            return f"{self.name}, количество продуктов: {total_quantity} шт."
+        return (
+            f"{self.name}, количество продуктов: {total_quantity} шт., "
+            f"Общая стоимость: {sum(p.price * p.quantity for p in self._products)} руб."
+        )

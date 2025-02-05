@@ -1,5 +1,8 @@
 import pytest
+from pytest import CaptureFixture
 
+from src.category import Category
+from src.order import Order
 from src.product import LawnGrass, Product, Smartphone
 
 
@@ -195,3 +198,60 @@ def test_add_non_product() -> None:
     )
     with pytest.raises(TypeError):
         smartphone + 100  # type: ignore
+
+
+def test_product_creation_mix(capsys: CaptureFixture) -> None:
+    """Тестирует работу миксина при создании объекта."""
+    product = Product(
+        name="Test Product",
+        description="Test Description",
+        price=100.0,
+        quantity=10
+    )
+
+    # Теперь мы можем использовать product, чтобы проверить его атрибуты
+    assert product.name == "Test Product"
+    assert product.description == "Test Description"
+    assert product.price == 100.0
+    assert product.quantity == 10
+
+    # Проверяем вывод в консоль
+    out, _ = capsys.readouterr()
+    expected_output = ("Создан объект класса Product с параметрами: "
+                       "name=Test Product, description=Test Description, "
+                       "price=100.0, quantity=10\n")
+
+    # Удаляем лишние пробелы для точного сравнения
+    out = out.strip()
+    expected_output = expected_output.strip()
+    assert out == expected_output
+
+
+def test_product_attributes() -> None:
+    """Тестирует правильность установки атрибутов."""
+    product = Product(
+        name="Test Product",
+        description="Test Description",
+        price=100.0,
+        quantity=10
+    )
+    assert product.name == "Test Product"
+    assert product.description == "Test Description"
+    assert product.price == 100.0
+    assert product.quantity == 10
+
+
+def test_order_creation() -> None:
+    """Тестирует создание заказа."""
+    product = Product("Test Product", "Test Description", 100.0, 20)
+    order = Order(product, 5)
+    assert order.quantity == 5
+    assert order.total_cost == 500.0
+
+
+def test_category_with_entity_with_count() -> None:
+    """Тестирует работу класса Category с EntityWithCount."""
+    category = Category("TestCategory", "Test Description")
+    product = Product("Test Product", "Test Description", 100.0, 10)
+    category.add_product(product)
+    assert category.get_total_quantity() == 10
