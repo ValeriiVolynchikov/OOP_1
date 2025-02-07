@@ -54,8 +54,8 @@
             </div>
         </aside>
         <h2>
-            <span class="text">64 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">64<span class="text"> run</span></button>
+            <span class="text">73 statements &nbsp;</span>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">73<span class="text"> run</span></button>
             <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">0<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
         </h2>
@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="z_a44f0ac069e85531_test_entity_with_count_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.10">coverage.py v7.6.10</a>,
-            created at 2025-02-05 01:37 +0300
+            created at 2025-02-07 12:18 +0300
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -209,6 +209,24 @@
     <p class="pln"><span class="n"><a id="t127" href="#t127">127</a></span><span class="t">        <span class="fst">f"</span><span class="fst">&#1054;&#1073;&#1097;&#1072;&#1103; &#1089;&#1090;&#1086;&#1080;&#1084;&#1086;&#1089;&#1090;&#1100;: </span><span class="op">{</span><span class="nam">smartphone</span><span class="op">.</span><span class="nam">price</span> <span class="op">*</span> <span class="nam">smartphone</span><span class="op">.</span><span class="nam">quantity</span><span class="op">}</span><span class="fst"> &#1088;&#1091;&#1073;.</span><span class="fst">"</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t128" href="#t128">128</a></span><span class="t">    <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t129" href="#t129">129</a></span><span class="t">    <span class="key">assert</span> <span class="nam">str</span><span class="op">(</span><span class="nam">category</span><span class="op">)</span> <span class="op">==</span> <span class="nam">expected_output</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t130" href="#t130">130</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t131" href="#t131">131</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t132" href="#t132">132</a></span><span class="t"><span class="key">def</span> <span class="nam">test_category_middle_price</span><span class="op">(</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t133" href="#t133">133</a></span><span class="t">    <span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t134" href="#t134">134</a></span><span class="t"><span class="str">    &#1058;&#1077;&#1089;&#1090;&#1080;&#1088;&#1091;&#1077;&#1090; &#1084;&#1077;&#1090;&#1086;&#1076; middle_price() &#1082;&#1083;&#1072;&#1089;&#1089;&#1072; Category.</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t135" href="#t135">135</a></span><span class="t"><span class="str">    &#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1103;&#1077;&#1090; &#1087;&#1088;&#1072;&#1074;&#1080;&#1083;&#1100;&#1085;&#1086;&#1089;&#1090;&#1100; &#1088;&#1072;&#1089;&#1095;&#1077;&#1090;&#1072; &#1089;&#1088;&#1077;&#1076;&#1085;&#1077;&#1081; &#1089;&#1090;&#1086;&#1080;&#1084;&#1086;&#1089;&#1090;&#1080; &#1090;&#1086;&#1074;&#1072;&#1088;&#1086;&#1074;.</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t136" href="#t136">136</a></span><span class="t"><span class="str">    """</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t137" href="#t137">137</a></span><span class="t">    <span class="nam">product1</span> <span class="op">=</span> <span class="nam">Product</span><span class="op">(</span><span class="nam">name</span><span class="op">=</span><span class="str">"Product A"</span><span class="op">,</span> <span class="nam">description</span><span class="op">=</span><span class="str">"Description A"</span><span class="op">,</span> <span class="nam">price</span><span class="op">=</span><span class="num">100.0</span><span class="op">,</span> <span class="nam">quantity</span><span class="op">=</span><span class="num">5</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t138" href="#t138">138</a></span><span class="t">    <span class="nam">product2</span> <span class="op">=</span> <span class="nam">Product</span><span class="op">(</span><span class="nam">name</span><span class="op">=</span><span class="str">"Product B"</span><span class="op">,</span> <span class="nam">description</span><span class="op">=</span><span class="str">"Description B"</span><span class="op">,</span> <span class="nam">price</span><span class="op">=</span><span class="num">200.0</span><span class="op">,</span> <span class="nam">quantity</span><span class="op">=</span><span class="num">8</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t139" href="#t139">139</a></span><span class="t">    <span class="nam">product3</span> <span class="op">=</span> <span class="nam">Product</span><span class="op">(</span><span class="nam">name</span><span class="op">=</span><span class="str">"Product C"</span><span class="op">,</span> <span class="nam">description</span><span class="op">=</span><span class="str">"Description C"</span><span class="op">,</span> <span class="nam">price</span><span class="op">=</span><span class="num">300.0</span><span class="op">,</span> <span class="nam">quantity</span><span class="op">=</span><span class="num">14</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t140" href="#t140">140</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t141" href="#t141">141</a></span><span class="t">    <span class="nam">category</span> <span class="op">=</span> <span class="nam">Category</span><span class="op">(</span><span class="nam">name</span><span class="op">=</span><span class="str">"TestCategory"</span><span class="op">,</span> <span class="nam">description</span><span class="op">=</span><span class="str">"Test Description"</span><span class="op">,</span> <span class="nam">products</span><span class="op">=</span><span class="op">[</span><span class="nam">product1</span><span class="op">,</span> <span class="nam">product2</span><span class="op">,</span> <span class="nam">product3</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t142" href="#t142">142</a></span><span class="t">    <span class="nam">expected_average</span> <span class="op">=</span> <span class="op">(</span><span class="num">100.0</span> <span class="op">+</span> <span class="num">200.0</span> <span class="op">+</span> <span class="num">300.0</span><span class="op">)</span> <span class="op">/</span> <span class="num">3</span>  <span class="com"># &#1057;&#1088;&#1077;&#1076;&#1085;&#1077;&#1077; &#1079;&#1085;&#1072;&#1095;&#1077;&#1085;&#1080;&#1077; &#1094;&#1077;&#1085;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t143" href="#t143">143</a></span><span class="t">    <span class="key">assert</span> <span class="nam">category</span><span class="op">.</span><span class="nam">middle_price</span><span class="op">(</span><span class="op">)</span> <span class="op">==</span> <span class="nam">expected_average</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t144" href="#t144">144</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t145" href="#t145">145</a></span><span class="t">    <span class="com"># &#1055;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1072; &#1087;&#1091;&#1089;&#1090;&#1086;&#1081; &#1082;&#1072;&#1090;&#1077;&#1075;&#1086;&#1088;&#1080;&#1080;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t146" href="#t146">146</a></span><span class="t">    <span class="nam">empty_category</span> <span class="op">=</span> <span class="nam">Category</span><span class="op">(</span><span class="nam">name</span><span class="op">=</span><span class="str">"EmptyCategory"</span><span class="op">,</span> <span class="nam">description</span><span class="op">=</span><span class="str">"Empty Description"</span><span class="op">,</span> <span class="nam">products</span><span class="op">=</span><span class="op">[</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t147" href="#t147">147</a></span><span class="t">    <span class="key">assert</span> <span class="nam">empty_category</span><span class="op">.</span><span class="nam">middle_price</span><span class="op">(</span><span class="op">)</span> <span class="op">==</span> <span class="num">0.0</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -218,7 +236,7 @@
             <a class="nav" href="z_a44f0ac069e85531_test_entity_with_count_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.10">coverage.py v7.6.10</a>,
-            created at 2025-02-05 01:37 +0300
+            created at 2025-02-07 12:18 +0300
         </p>
     </div>
 </footer>
