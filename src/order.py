@@ -1,14 +1,20 @@
 from .entity_with_count import EntityWithCount
 from .product import Product
+from .exceptions import ZeroQuantityError
 
 
 class Order(EntityWithCount):
-    """Класс для представления заказа."""
+    """
+        Инициализация объекта Order.
 
+        :param product: Объект класса Product.
+        :param quantity: Количество товара в заказе.
+        :raises ValueError: Если количество товара в заказе не положительное или недостаточно товара на складе.
+    """
     def __init__(self, product: Product, quantity: int) -> None:
         #  super().__init__()
         if quantity <= 0:
-            raise ValueError("Количество товара в заказе должно быть положительным.")
+            raise ZeroQuantityError("Количество товара в заказе должно быть положительным.")
         if product.quantity < quantity:
             raise ValueError("Недостаточно товара на складе.")
 

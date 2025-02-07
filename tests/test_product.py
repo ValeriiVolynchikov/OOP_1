@@ -4,6 +4,7 @@ from pytest import CaptureFixture
 from src.category import Category
 from src.order import Order
 from src.product import LawnGrass, Product, Smartphone
+from src.exceptions import ZeroQuantityError
 
 
 def test_product_initialization() -> None:
@@ -255,3 +256,27 @@ def test_category_with_entity_with_count() -> None:
     product = Product("Test Product", "Test Description", 100.0, 10)
     category.add_product(product)
     assert category.get_total_quantity() == 10
+
+
+def test_product_creation_with_zero_quantity():
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
+
+def test_category_middle_price():
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+    category = Category("Смартфоны", "Категория смартфонов", [product1, product2])
+
+    assert category.middle_price() == (180000.0 + 210000.0) / 2
+
+def test_category_middle_price_empty():
+    category = Category("Пустая категория", "Категория без продуктов", [])
+    assert category.middle_price() == 0
+
+
+def test_add_product_with_zero_quantity():
+    category = Category("Смартфоны", "Категория смартфонов")
+
+    # Проверяем, что создание товара с нулевым количеством вызывает исключение
+    with pytest.raises(ValueError, match="Товар с нулевым количеством не может быть добавлен"):
+        product = Product("Бракованный товар", "Неверное количество", 1000.0, 0)

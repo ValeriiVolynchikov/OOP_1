@@ -20,6 +20,13 @@ class Product(LoggingMixin, BaseProduct):
             raise ValueError("Цена товара не может быть отрицательной")
         if quantity < 0:
             raise ValueError("Количество товара не может быть отрицательным")
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+
+        # # Проверка на "бракованный товар"
+        # if name == "Бракованный товар":
+        #     raise ValueError("Бракованный товар не может быть добавлен.")
+
         super().__init__(name=name, description=description, price=price, quantity=quantity)
         self.__price = price  # Приватный атрибут цены
 
