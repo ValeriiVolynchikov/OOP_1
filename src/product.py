@@ -1,3 +1,5 @@
+from src.exceptions import ZeroQuantityError
+
 from .base_product import BaseProduct
 from .logging_mixin import LoggingMixin
 
@@ -21,7 +23,7 @@ class Product(LoggingMixin, BaseProduct):
         if quantity < 0:
             raise ValueError("Количество товара не может быть отрицательным")
         if quantity == 0:
-            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+            raise ZeroQuantityError("Товар с нулевым количеством не может быть добавлен.")
 
         # # Проверка на "бракованный товар"
         # if name == "Бракованный товар":

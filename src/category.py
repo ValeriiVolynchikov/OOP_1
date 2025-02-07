@@ -1,9 +1,8 @@
 from typing import List, Optional
 
 from src.entity_with_count import EntityWithCount
-# from .logging_mixin import LoggingMixin
+from src.exceptions import ZeroQuantityError
 from src.product import Product
-from .exceptions import ZeroQuantityError
 
 
 class Category(EntityWithCount):

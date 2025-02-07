@@ -1,6 +1,6 @@
 from .entity_with_count import EntityWithCount
-from .product import Product
 from .exceptions import ZeroQuantityError
+from .product import Product
 
 
 class Order(EntityWithCount):

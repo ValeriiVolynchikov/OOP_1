@@ -1,7 +1,8 @@
 import pytest
+
+from src.exceptions import ZeroQuantityError
 from src.order import Order
 from src.product import Product
-from src.exceptions import ZeroQuantityError
 
 
 def test_order_creation() -> None:
