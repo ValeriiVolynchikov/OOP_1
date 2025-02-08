@@ -2,6 +2,7 @@ import pytest
 from pytest import CaptureFixture
 
 from src.category import Category
+from src.exceptions import ZeroQuantityError
 from src.order import Order
 from src.product import LawnGrass, Product, Smartphone
 
@@ -255,3 +256,21 @@ def test_category_with_entity_with_count() -> None:
     product = Product("Test Product", "Test Description", 100.0, 10)
     category.add_product(product)
     assert category.get_total_quantity() == 10
+
+
+def test_product_creation_with_zero_quantity() -> None:
+    with pytest.raises(ZeroQuantityError, match="Товар с нулевым количеством не может быть добавлен."):
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
+
+
+def test_category_middle_price() -> None:
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+    category = Category("Смартфоны", "Категория смартфонов", [product1, product2])
+
+    assert category.middle_price() == (180000.0 + 210000.0) / 2
+
+
+def test_category_middle_price_empty() -> None:
+    category = Category("Пустая категория", "Категория без продуктов", [])
+    assert category.middle_price() == 0

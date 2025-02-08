@@ -1,5 +1,6 @@
 import pytest
 
+from src.exceptions import ZeroQuantityError
 from src.order import Order
 from src.product import Product
 
@@ -25,7 +26,7 @@ def test_order_invalid_quantity() -> None:
     """
     product = Product(name="Test Product", description="Test Description", price=100.0, quantity=20)
 
-    with pytest.raises(ValueError) as exc_info:
+    with pytest.raises(ZeroQuantityError) as exc_info:
         Order(product=product, quantity=0)  # Некорректное количество (должно быть > 0)
     assert "Количество товара в заказе должно быть положительным." in str(exc_info.value)
 

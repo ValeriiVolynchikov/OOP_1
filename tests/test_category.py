@@ -127,3 +127,21 @@ def test_category_str_representation() -> None:
         f"Общая стоимость: {smartphone.price * smartphone.quantity} руб."
     )
     assert str(category) == expected_output
+
+
+def test_category_middle_price() -> None:
+    """
+    Тестирует метод middle_price() класса Category.
+    Проверяет правильность расчета средней стоимости товаров.
+    """
+    product1 = Product(name="Product A", description="Description A", price=100.0, quantity=5)
+    product2 = Product(name="Product B", description="Description B", price=200.0, quantity=8)
+    product3 = Product(name="Product C", description="Description C", price=300.0, quantity=14)
+
+    category = Category(name="TestCategory", description="Test Description", products=[product1, product2, product3])
+    expected_average = (100.0 + 200.0 + 300.0) / 3  # Среднее значение цен
+    assert category.middle_price() == expected_average
+
+    # Проверка пустой категории
+    empty_category = Category(name="EmptyCategory", description="Empty Description", products=[])
+    assert empty_category.middle_price() == 0.0
